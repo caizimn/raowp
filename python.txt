@@ -1,2 +1,47 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+path = os.path.dirname(os.path.abspath(__file__))
+source_file = os.path.join(path, 'source.xlsx')
+output_file = os.path.join(path, 'output.xlsx')
+
+
+
+
+import xlrd
+
+xlsx = xlrd.open_workbook('test.xlsx')
+table = xlsx.sheet_by_index(1)
+value = table.col(1,start_rowx=2,end_rowx=None)
+value4 = table.col(7,start_rowx=2,end_rowx=None)
+new_value = []
+for tempval in value:
+    new_value.append(tempval.value)
+new_value4 = []
+for tempval4 in value4:
+    new_value4.append(tempval4.value)
+
+
+xlsxb = xlrd.open_workbook('b.xlsx')
+tableb = xlsxb.sheet_by_index(0)
+valueb = tableb.col(1,start_rowx=0,end_rowx=None)
+new_valueb = []
+for tempvalb in valueb:
+    new_valueb.append(tempvalb.value)
+
+for temp in new_valueb:
+    print(new_value4[new_value.index(temp)])
+
+import xlwt
+workbook = xlwt.Workbook(encoding='UTF-8')
+worksheet = workbook.add_sheet("Sheet1")
+i = 0
+for temp in new_valueb:
+    worksheet.write(i,0,temp)
+    worksheet.write(i, 1, new_value4[new_value.index(temp)])
+    i=i+1
+
+workbook.save("result.xlsx")
+
+
+
+
