@@ -35,7 +35,7 @@ void d(void *pSrc,int len)
 
     while (offset < len)
     {
-        printf("%012x   ", line+offset);
+        printf("%012x   ", line);
         thisline = len - offset;
 
         if (thisline > 16)
